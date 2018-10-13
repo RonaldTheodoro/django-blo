@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from . import models
+
 
 def index(request):
     return render(request, 'index.html', {})
@@ -14,7 +16,8 @@ def post_detail(request):
 
 
 def post_list(request):
-    return render(request, 'posts/list.html', {})
+    posts = models.Post.objects.all()
+    return render(request, 'posts/list.html', {'posts': posts})
 
 
 def post_update(request):
