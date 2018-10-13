@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 
+def index(request):
+    return render(request, 'index.html', {})
+
 def post_create(request):
     return render(request, 'posts/create.html', {})
 
