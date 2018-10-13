@@ -11,4 +11,4 @@ class TestPostDelete(TestCase):
         self.assertEqual(200, self.response.status_code)
 
     def test_template(self):
-        self.assertTemplateUsed(self.response, 'delete.html')
+        self.assertTemplateUsed(self.response, 'posts/delete.html')

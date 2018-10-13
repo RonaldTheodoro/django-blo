@@ -11,4 +11,4 @@ class TestPostCreate(TestCase):
         self.assertEqual(200, self.response.status_code)
 
     def test_template(self):
-        self.assertTemplateUsed(self.response, 'create.html')
+        self.assertTemplateUsed(self.response, 'posts/create.html')

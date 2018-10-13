@@ -11,4 +11,4 @@ class TestPostList(TestCase):
         self.assertEqual(200, self.response.status_code)
 
     def test_template(self):
-        self.assertTemplateUsed(self.response, 'list.html')
+        self.assertTemplateUsed(self.response, 'posts/list.html')
