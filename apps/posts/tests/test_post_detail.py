@@ -1,11 +1,18 @@
 from django.test import TestCase
 from django.urls import reverse
 
+from .. import models
 
 class TestPostDetail(TestCase):
 
     def setUp(self):
-        self.response = self.client.get(reverse('posts:detail'))
+        self.post = models.Post.objects.create(
+            title='title',
+            content='content'
+        )
+        self.response = self.client.get(
+            reverse('posts:detail', kwargs={'pk': self.post.pk})
+        )
 
     def test_get(self):
         self.assertEqual(200, self.response.status_code)

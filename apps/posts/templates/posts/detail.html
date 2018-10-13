@@ -2,4 +2,23 @@
 
 {% block content %}
     <h1>Detail</h1>
+
+    <table>
+        <tr>
+            <th>title</th>
+            <td>{{ post.title }}</td>
+        </tr>
+        <tr>
+            <th>content</th>
+            <td>{{ post.content }}</td>
+        </tr>
+        <tr>
+            <th>updated</th>
+            <td>{{ post.updated }}</td>
+        </tr>
+        <tr>
+            <th>timestamp</th>
+            <td>{{ post.timestamp }}</td>
+        </tr>
+    </table>
 {% endblock content %}
