@@ -3,20 +3,20 @@ from django.http import HttpResponse
 
 
 def post_create(request):
-    return HttpResponse('<h1>Hello World</h1>')
+    return render(request, 'create.html', {})
 
 
 def post_detail(request):
-    return HttpResponse('<h1>Hello World</h1>')
+    return render(request, 'detail.html', {})
 
 
 def post_list(request):
-    return HttpResponse('<h1>Hello World</h1>')
+    return render(request, 'list.html', {})
 
 
 def post_update(request):
-    return HttpResponse('<h1>Hello World</h1>')
+    return render(request, 'update.html', {})
 
 
 def post_delete(request):
-    return HttpResponse('<h1>Hello World</h1>')
+    return render(request, 'delete.html', {})
