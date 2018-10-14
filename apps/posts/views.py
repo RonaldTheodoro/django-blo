@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core import paginator
 from django.shortcuts import get_object_or_404, redirect, render
 
 from . import forms, models
@@ -29,7 +30,17 @@ def post_detail(request, pk):
 
 
 def post_list(request):
-    posts = models.Post.objects.all()
+    posts_list = models.Post.objects.all()
+    pages = paginator.Paginator(posts_list, 5)
+    page = request.GET.get('page')
+
+    try:
+        posts = pages.page(page)
+    except paginator.PageNotAnInteger:
+        posts = pages.page(1)
+    except paginator.EmptyPage:
+        posts = pages.page(pages.num_pages)
+
     return render(request, 'posts/index.html', {'posts': posts})
 
 
