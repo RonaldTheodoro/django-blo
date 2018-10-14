@@ -1,11 +1,19 @@
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 
-from . import models
+from . import forms, models
 
 
 def post_create(request):
-    return render(request, 'posts/create.html', {})
+    if request.method == 'POST':
+        form = forms.PostForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect(form.instance.get_absolute_url())
+    else:
+        form = forms.PostForm()
+    return render(request, 'posts/create.html', {'form': form})
 
 
 def post_detail(request, pk):
