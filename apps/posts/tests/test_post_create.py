@@ -1,3 +1,4 @@
+from django.contrib.messages import get_messages
 from django.test import TestCase
 from django.urls import reverse
 
@@ -45,6 +46,11 @@ class TestPostCreateNew(TestCase):
             self.response,
             reverse('posts:detail', kwargs={'pk': 1})
         )
+
+    def test_messages(self):
+        messages = list(get_messages(self.response.wsgi_request))
+        self.assertEqual(1, len(messages))
+        self.assertEqual('Successfully Created', str(messages[0]))
 
     def test_save_subscription(self):
         self.assertTrue(models.Post.objects.exists())
