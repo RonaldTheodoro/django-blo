@@ -26,8 +26,17 @@ def post_list(request):
     return render(request, 'posts/index.html', {'posts': posts})
 
 
-def post_update(request):
-    return render(request, 'posts/update.html', {})
+def post_edit(request, pk):
+    post = get_object_or_404(models.Post, pk=pk)
+    if request.method == 'POST':
+        form = forms.PostForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect(form.instance.get_absolute_url())
+    else:
+        form = forms.PostForm(instance=post)
+    return render(request, 'posts/form.html', {'form': form})
 
 
 def post_delete(request):
