@@ -8,8 +8,16 @@ django = "*"
 pytest = "*"
 pytest-django = "*"
 pytest-cov = "*"
+python-decouple = "*"
+dj-database-url = "*"
+dj-static = "*"
+django-extensions = "*"
+gunicorn = "*"
+"psycopg2" = "*"
+django-test-without-migrations = "*"
 
 [dev-packages]
+ipython = {extras = ["notebook"]}
 
 [requires]
 python_version = "3.6"
