@@ -61,7 +61,7 @@ class TestPostEditPost(TestCase):
         messages = list(get_messages(self.response.wsgi_request))
         self.assertEqual(2, len(messages))
         self.assertEqual('Successfully Created', str(messages[0]))
-        self.assertEqual('Successfully Updated', str(messages[1]))
+        self.assertEqual('The post has been saved', str(messages[1]))
 
     def test_save_subscription(self):
         self.assertTrue(models.Post.objects.exists())

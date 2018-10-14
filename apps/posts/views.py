@@ -12,6 +12,12 @@ def post_create(request):
             form.save()
             messages.success(request, 'Successfully Created')
             return redirect(form.instance.get_absolute_url())
+        else:
+            messages.error(
+                request,
+                'It was not possible to create the post, '
+                'please check the fields'
+            )
     else:
         form = forms.PostForm()
     return render(request, 'posts/form.html', {'form': form})
@@ -34,8 +40,14 @@ def post_edit(request, pk):
 
         if form.is_valid():
             form.save()
-            messages.success(request, 'Successfully Updated')
+            messages.success(request, 'The post has been saved')
             return redirect(form.instance.get_absolute_url())
+        else:
+            messages.error(
+                request,
+                'It was not possible to update the post, '
+                'please check the fields'
+            )
     else:
         form = forms.PostForm(instance=post)
     return render(request, 'posts/form.html', {'form': form})
