@@ -8,9 +8,13 @@
     <title>{% block title %}Django Blog{% endblock title %}</title>
 </head>
 <body>
-    {% for message in messages %}
-        <p>{{ message }}</p>
-    {% endfor %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tag %}class="message.tags"{% endif %}>
+                {{ message }}
+            </li>
+        {% endfor %}
+    </ul>
     {% block content %}
     {% endblock content %}
 </body>
