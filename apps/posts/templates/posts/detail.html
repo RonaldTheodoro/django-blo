@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {% if post.image %}
+        <img src="{{ post.image.url }}" class="img-responsive">
+    {% endif %}
     <h1>{{ post.title }}</h1>
     <small>{{ post.timestamp }}</small>
 
