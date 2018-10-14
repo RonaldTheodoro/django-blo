@@ -29,7 +29,7 @@ def post_list(request):
 def post_edit(request, pk):
     post = get_object_or_404(models.Post, pk=pk)
     if request.method == 'POST':
-        form = forms.PostForm(request.POST)
+        form = forms.PostForm(request.POST, instance=post)
 
         if form.is_valid():
             form.save()
