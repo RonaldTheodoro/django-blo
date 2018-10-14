@@ -1,11 +1,17 @@
 from django.db import models
 from django.urls import reverse
 
+from contrib import utils
 
 class Post(models.Model):
     title = models.CharField('title', max_length=120)
     content = models.TextField('content')
-    image = models.ImageField('image', null=True, blank=True)
+    image = models.ImageField(
+        'image',
+        upload_to=utils.upload_file_path,
+        null=True,
+        blank=True
+    )
     updated = models.DateTimeField(
         'updated',
         auto_now=True,
