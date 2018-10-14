@@ -15,6 +15,7 @@ django-extensions = "*"
 gunicorn = "*"
 "psycopg2" = "*"
 django-test-without-migrations = "*"
+pillow = "*"
 
 [dev-packages]
 ipython = {extras = ["notebook"]}

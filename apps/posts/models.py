@@ -5,6 +5,7 @@ from django.urls import reverse
 class Post(models.Model):
     title = models.CharField('title', max_length=120)
     content = models.TextField('content')
+    image = models.ImageField('image', null=True, blank=True)
     updated = models.DateTimeField(
         'updated',
         auto_now=True,
