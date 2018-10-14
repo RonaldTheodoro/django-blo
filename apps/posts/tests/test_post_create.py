@@ -52,7 +52,7 @@ class TestPostCreateNew(TestCase):
         self.assertEqual(1, len(messages))
         self.assertEqual('Successfully Created', str(messages[0]))
 
-    def test_save_subscription(self):
+    def test_save_post(self):
         self.assertTrue(models.Post.objects.exists())
 
 

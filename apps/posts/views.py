@@ -53,5 +53,8 @@ def post_edit(request, pk):
     return render(request, 'posts/form.html', {'form': form})
 
 
-def post_delete(request):
-    return render(request, 'posts/delete.html', {})
+def post_delete(request, pk):
+    post = get_object_or_404(models.Post, pk=pk)
+    post.delete()
+    messages.success(request, 'The post has been deleted')
+    return redirect('posts:index')
