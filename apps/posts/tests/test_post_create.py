@@ -14,7 +14,7 @@ class TestPostCreate(TestCase):
         self.assertEqual(200, self.response.status_code)
 
     def test_template(self):
-        self.assertTemplateUsed(self.response, 'posts/create.html')
+        self.assertTemplateUsed(self.response, 'posts/form.html')
 
     def test_has_form(self):
         self.assertIsInstance(self.form, forms.PostForm)
@@ -60,7 +60,7 @@ class TestPostCreateInvalid(TestCase):
         self.assertEqual(200, self.response.status_code)
 
     def test_template(self):
-        self.assertTemplateUsed(self.response, 'posts/create.html')
+        self.assertTemplateUsed(self.response, 'posts/form.html')
 
     def test_has_form(self):
         self.assertIsInstance(self.form, forms.PostForm)

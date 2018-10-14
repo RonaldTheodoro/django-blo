@@ -13,7 +13,7 @@ def post_create(request):
             return redirect(form.instance.get_absolute_url())
     else:
         form = forms.PostForm()
-    return render(request, 'posts/create.html', {'form': form})
+    return render(request, 'posts/form.html', {'form': form})
 
 
 def post_detail(request, pk):
