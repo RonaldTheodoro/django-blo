@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from .. import forms
+from .. import forms, models
 
 
 class TestPostCreate(TestCase):
@@ -32,3 +32,19 @@ class TestPostCreate(TestCase):
         for text, count in tags:
             with self.subTest():
                 self.assertContains(self.response, text, count)
+
+
+class TestPostCreateNew(TestCase):
+
+    def setUp(self):
+        data = {'title': 'title', 'content': 'content'}
+        self.response = self.client.post(reverse('posts:create'), data)
+
+    def test_post(self):
+        self.assertRedirects(
+            self.response,
+            reverse('posts:detail', kwargs={'pk': 1})
+        )
+
+    def test_save_subscription(self):
+        self.assertTrue(models.Post.objects.exists())
