@@ -32,7 +32,7 @@ class TestPostEdit(TestCase):
     def test_html(self):
         tags = (
             ('<form', 1),
-            ('<input', 3),
+            ('<input', 4),
             ('type="text"', 1),
             ('type="submit"', 1),
         )
