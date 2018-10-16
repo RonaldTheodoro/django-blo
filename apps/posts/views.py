@@ -1,10 +1,11 @@
 from django.contrib import messages
 from django.core import paginator
 from django.shortcuts import get_object_or_404, redirect, render
-
+from django.contrib.admin.views.decorators import staff_member_required
 from . import forms, models
 
 
+@staff_member_required
 def post_create(request):
     if request.method == 'POST':
         form = forms.PostForm(data=request.POST, files=request.FILES)
@@ -43,7 +44,7 @@ def post_list(request):
 
     return render(request, 'posts/index.html', {'posts': posts})
 
-
+@staff_member_required
 def post_edit(request, slug):
     post = get_object_or_404(models.Post, slug=slug)
     if request.method == 'POST':
@@ -67,7 +68,7 @@ def post_edit(request, slug):
         form = forms.PostForm(instance=post)
     return render(request, 'posts/form.html', {'form': form})
 
-
+@staff_member_required
 def post_delete(request, slug):
     post = get_object_or_404(models.Post, slug=slug)
     post.delete()
