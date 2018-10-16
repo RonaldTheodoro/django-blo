@@ -11,7 +11,7 @@ class TestPostDetail(TestCase):
             content='content'
         )
         self.response = self.client.get(
-            reverse('posts:detail', kwargs={'pk': self.post.pk})
+            reverse('posts:detail', kwargs={'slug': self.post.slug})
         )
 
     def test_get(self):

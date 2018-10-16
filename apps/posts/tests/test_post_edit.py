@@ -13,7 +13,7 @@ class TestPostEdit(TestCase):
             content='content'
         )
         self.response = self.client.get(
-            reverse('posts:edit', kwargs={'pk': self.post.pk})
+            reverse('posts:edit', kwargs={'slug': self.post.slug})
         )
         self.form = self.response.context['form']
 
@@ -47,14 +47,14 @@ class TestPostEditPost(TestCase):
         data = {'title': 'title', 'content': 'content'}
         self.client.post(reverse('posts:create'), data)
         self.response = self.client.post(
-            reverse('posts:edit', kwargs={'pk': 1}),
+            reverse('posts:edit', kwargs={'slug': 'title'}),
             data
         )
 
     def test_post(self):
         self.assertRedirects(
             self.response,
-            reverse('posts:detail', kwargs={'pk': 1})
+            reverse('posts:detail', kwargs={'slug': 'title'})
         )
 
     def test_messages(self):

@@ -24,8 +24,8 @@ def post_create(request):
     return render(request, 'posts/form.html', {'form': form})
 
 
-def post_detail(request, pk):
-    post = get_object_or_404(models.Post, pk=pk)
+def post_detail(request, slug):
+    post = get_object_or_404(models.Post, slug=slug)
     return render(request, 'posts/detail.html', {'post': post})
 
 
@@ -44,8 +44,8 @@ def post_list(request):
     return render(request, 'posts/index.html', {'posts': posts})
 
 
-def post_edit(request, pk):
-    post = get_object_or_404(models.Post, pk=pk)
+def post_edit(request, slug):
+    post = get_object_or_404(models.Post, slug=slug)
     if request.method == 'POST':
         form = forms.PostForm(
             data=request.POST,
@@ -68,8 +68,8 @@ def post_edit(request, pk):
     return render(request, 'posts/form.html', {'form': form})
 
 
-def post_delete(request, pk):
-    post = get_object_or_404(models.Post, pk=pk)
+def post_delete(request, slug):
+    post = get_object_or_404(models.Post, slug=slug)
     post.delete()
     messages.success(request, 'The post has been deleted')
     return redirect('posts:index')

@@ -10,7 +10,7 @@ class TestPostDelete(TestCase):
         data = {'title': 'title', 'content': 'content'}
         self.client.post(reverse('posts:create'), data)
         self.response = self.client.get(
-            reverse('posts:delete', kwargs={'pk': 1})
+            reverse('posts:delete', kwargs={'slug': 'title'})
         )
 
     def test_get(self):

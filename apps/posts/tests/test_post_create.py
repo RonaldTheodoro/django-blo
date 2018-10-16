@@ -44,7 +44,7 @@ class TestPostCreateNew(TestCase):
     def test_post(self):
         self.assertRedirects(
             self.response,
-            reverse('posts:detail', kwargs={'pk': 1})
+            reverse('posts:detail', kwargs={'slug': 'title'})
         )
 
     def test_messages(self):
