@@ -1,22 +1,15 @@
 from django.contrib.messages import get_messages
-from django.test import TestCase
 from django.urls import reverse
 
 from .. import forms, models
+from .base_test import BaseTest
 
-
-class TestPostEdit(TestCase):
-    fixtures = ['users.json']
+class TestPostEdit(BaseTest):
 
     def setUp(self):
-        self.client.login(username='user', password='12345')
-        self.post = models.Post.objects.create(
-            title='title',
-            content='content',
-            user_id=1
-        )
+        super(TestPostEdit, self).setUp()
         self.response = self.client.get(
-            reverse('posts:edit', kwargs={'slug': self.post.slug})
+            reverse('posts:edit', kwargs={'slug': self.data['title']})
         )
         self.form = self.response.context['form']
 
@@ -44,16 +37,13 @@ class TestPostEdit(TestCase):
                 self.assertContains(self.response, text, count)
 
 
-class TestPostEditPost(TestCase):
-    fixtures = ['users.json']
+class TestPostEditPost(BaseTest):
 
     def setUp(self):
-        self.client.login(username='user', password='12345')
-        data = {'title': 'title', 'content': 'content', 'user_id': 1}
-        self.client.post(reverse('posts:create'), data)
+        super(TestPostEditPost, self).setUp()
         self.response = self.client.post(
-            reverse('posts:edit', kwargs={'slug': 'title'}),
-            data
+            reverse('posts:edit', kwargs={'slug': self.data['title']}),
+            self.data
         )
 
     def test_post(self):

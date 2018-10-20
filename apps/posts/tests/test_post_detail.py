@@ -1,21 +1,15 @@
-from django.test import TestCase
 from django.urls import reverse
 
 from .. import models
+from .base_test import BaseTest
 
 
-class TestPostDetail(TestCase):
-    fixtures = ['users.json']
+class TestPostDetail(BaseTest):
 
     def setUp(self):
-        self.client.login(username='user', password='12345')
-        self.post = models.Post.objects.create(
-            title='title',
-            content='content',
-            user_id=1
-        )
+        super(TestPostDetail, self).setUp()
         self.response = self.client.get(
-            reverse('posts:detail', kwargs={'slug': self.post.slug})
+            reverse('posts:detail', kwargs={'slug': self.data['title']})
         )
 
     def test_get(self):

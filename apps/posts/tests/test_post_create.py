@@ -1,16 +1,15 @@
-from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
 from django.test import TestCase
 from django.urls import reverse
 
+from .base_test import BaseTest
 from .. import forms, models
 
 
-class TestPostCreate(TestCase):
-    fixtures = ['users.json']
+class TestPostCreate(BaseTest):
 
     def setUp(self):
-        self.client.login(username='user', password='12345')
+        super(TestPostCreate, self).setUp()
         self.response = self.client.get(reverse('posts:create'))
         self.form = self.response.context['form']
 
@@ -38,18 +37,12 @@ class TestPostCreate(TestCase):
                 self.assertContains(self.response, text, count)
 
 
-class TestPostCreateNew(TestCase):
-    fixtures = ['users.json']
-
-    def setUp(self):
-        self.client.login(username='user', password='12345')
-        data = {'title': 'title', 'content': 'content'}
-        self.response = self.client.post(reverse('posts:create'), data)
+class TestPostCreateNew(BaseTest):
 
     def test_post(self):
         self.assertRedirects(
             self.response,
-            reverse('posts:detail', kwargs={'slug': 'title'})
+            reverse('posts:detail', kwargs={'slug': self.data['title']})
         )
 
     def test_messages(self):

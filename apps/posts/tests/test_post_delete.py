@@ -1,17 +1,14 @@
 from django.contrib.messages import get_messages
-from django.test import TestCase
 from django.urls import reverse
 
 from .. import models
+from .base_test import BaseTest
 
 
-class TestPostDelete(TestCase):
-    fixtures = ['users.json']
+class TestPostDelete(BaseTest):
 
     def setUp(self):
-        data = {'title': 'title', 'content': 'content', 'user_id': 1}
-        self.client.login(username='user', password='12345')
-        self.client.post(reverse('posts:create'), data)
+        super(TestPostDelete, self).setUp()
         self.response = self.client.get(
             reverse('posts:delete', kwargs={'slug': 'title'})
         )
