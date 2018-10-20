@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
 from django.test import TestCase
 from django.urls import reverse
@@ -6,8 +7,10 @@ from .. import forms, models
 
 
 class TestPostCreate(TestCase):
+    fixtures = ['users.json']
 
     def setUp(self):
+        self.client.login(username='user', password='12345')
         self.response = self.client.get(reverse('posts:create'))
         self.form = self.response.context['form']
 
@@ -36,8 +39,10 @@ class TestPostCreate(TestCase):
 
 
 class TestPostCreateNew(TestCase):
+    fixtures = ['users.json']
 
     def setUp(self):
+        self.client.login(username='user', password='12345')
         data = {'title': 'title', 'content': 'content'}
         self.response = self.client.post(reverse('posts:create'), data)
 
@@ -57,8 +62,10 @@ class TestPostCreateNew(TestCase):
 
 
 class TestPostCreateInvalid(TestCase):
+    fixtures = ['users.json']
 
     def setUp(self):
+        self.client.login(username='user', password='12345')
         self.response = self.client.post(reverse('posts:create'), {})
         self.form = self.response.context['form']
 

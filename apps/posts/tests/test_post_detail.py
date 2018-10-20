@@ -3,12 +3,16 @@ from django.urls import reverse
 
 from .. import models
 
+
 class TestPostDetail(TestCase):
+    fixtures = ['users.json']
 
     def setUp(self):
+        self.client.login(username='user', password='12345')
         self.post = models.Post.objects.create(
             title='title',
-            content='content'
+            content='content',
+            user_id=1
         )
         self.response = self.client.get(
             reverse('posts:detail', kwargs={'slug': self.post.slug})

@@ -6,11 +6,14 @@ from .. import forms, models
 
 
 class TestPostEdit(TestCase):
+    fixtures = ['users.json']
 
     def setUp(self):
+        self.client.login(username='user', password='12345')
         self.post = models.Post.objects.create(
             title='title',
-            content='content'
+            content='content',
+            user_id=1
         )
         self.response = self.client.get(
             reverse('posts:edit', kwargs={'slug': self.post.slug})
@@ -42,9 +45,11 @@ class TestPostEdit(TestCase):
 
 
 class TestPostEditPost(TestCase):
+    fixtures = ['users.json']
 
     def setUp(self):
-        data = {'title': 'title', 'content': 'content'}
+        self.client.login(username='user', password='12345')
+        data = {'title': 'title', 'content': 'content', 'user_id': 1}
         self.client.post(reverse('posts:create'), data)
         self.response = self.client.post(
             reverse('posts:edit', kwargs={'slug': 'title'}),

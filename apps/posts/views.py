@@ -11,9 +11,11 @@ def post_create(request):
         form = forms.PostForm(data=request.POST, files=request.FILES)
 
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
             messages.success(request, 'Successfully Created')
-            return redirect(form.instance.get_absolute_url())
+            return redirect(post.get_absolute_url())
         else:
             messages.error(
                 request,

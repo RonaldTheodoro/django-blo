@@ -4,10 +4,13 @@ from django.urls import reverse
 
 from .. import models
 
+
 class TestPostDelete(TestCase):
+    fixtures = ['users.json']
 
     def setUp(self):
-        data = {'title': 'title', 'content': 'content'}
+        data = {'title': 'title', 'content': 'content', 'user_id': 1}
+        self.client.login(username='user', password='12345')
         self.client.post(reverse('posts:create'), data)
         self.response = self.client.get(
             reverse('posts:delete', kwargs={'slug': 'title'})
