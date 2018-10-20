@@ -1,7 +1,8 @@
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
-
 from contrib import utils
+
 
 class Post(models.Model):
     title = models.CharField('title', max_length=120)
@@ -22,6 +23,10 @@ class Post(models.Model):
         'timestamp',
         auto_now=False,
         auto_now_add=True
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
     )
 
     class Meta:
